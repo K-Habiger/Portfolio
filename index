@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ksenia Habiger — FP&A Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141414;
+    --charcoal: #2A2A2A;
+    --mid: #5A5A5A;
+    --silver: #C0C0C0;
+    --teal: #1A7A6E;
+    --teal-light: #22A094;
+    --teal-faint: rgba(26,122,110,0.07);
+    --bg: #F8F6F2;
+    --white: #FFFFFF;
+    --rule: rgba(20,20,20,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 200;
+    background: rgba(248,246,242,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 6%;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-linkedin {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal) !important;
+    border: 1px solid rgba(26,122,110,0.3);
+    padding: 0.3rem 0.75rem;
+    transition: all 0.2s !important;
+  }
+  .nav-linkedin:hover { background: var(--teal) !important; color: white !important; }
+
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 0 6%;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: 'FP&A';
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(12rem, 22vw, 22rem);
+    font-weight: 700;
+    color: rgba(26,122,110,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    max-width: 780px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.1s both;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow-line { width: 40px; height: 1px; background: var(--teal); }
+  .hero-eyebrow-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+  }
+  h1.hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+  h1.hero-name em { font-style: normal; color: var(--teal); }
+  .hero-summary {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 620px;
+    margin-bottom: 3rem;
+  }
+  .hero-summary strong { font-weight: 500; color: var(--charcoal); }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer; border: none;
+    font-family: 'Outfit', sans-serif;
+  }
+  .btn-filled { background: var(--teal); color: white; }
+  .btn-filled:hover { background: var(--teal-light); transform: translateY(-2px); }
+  .btn-outline { border: 1px solid rgba(20,20,20,0.2); color: var(--charcoal); background: transparent; }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-stats {
+    border-top: 1px solid var(--rule);
+    padding: 2.5rem 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative; z-index: 1;
+    animation: fadeUp 0.9s 0.4s both;
+  }
+  .hero-stat { padding: 0 2.5rem 0 0; border-right: 1px solid var(--rule); }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .hero-stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+
+  section { padding: 6rem 6%; }
+  .sec-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .sec-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--teal); }
+  h2.sec-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: start; }
+  .about-body p { font-size: 1.05rem; line-height: 1.85; color: var(--mid); font-weight: 300; margin-bottom: 1.4rem; }
+  .about-body p strong { color: var(--charcoal); font-weight: 500; }
+  .aside-block { border: 1px solid var(--rule); padding: 1.5rem; margin-bottom: 1rem; }
+  .aside-block-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.5rem; }
+  .aside-block-val { font-size: 0.92rem; color: var(--charcoal); line-height: 1.5; }
+
+  /* ── PHOTO placeholder ── */
+  .photo-placeholder {
+    width: 100%; aspect-ratio: 3/4; max-width: 240px;
+    border: 1px dashed rgba(26,122,110,0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: var(--teal); margin-bottom: 1rem;
+    background: var(--teal-faint);
+  }
+  .photo-placeholder-icon { font-size: 2rem; opacity: 0.5; }
+  .photo-placeholder-txt { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; text-align: center; padding: 0 1rem; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .skill-cell { background: var(--bg); padding: 2rem 1.75rem; transition: background 0.2s; }
+  .skill-cell:hover { background: var(--white); }
+  .skill-cell-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+  .skill-cell h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.75rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .pill { font-size: 0.72rem; padding: 0.2rem 0.65rem; background: var(--white); border: 1px solid var(--rule); color: var(--charcoal); border-radius: 100px; }
+  .pill.teal { background: var(--teal-faint); border-color: rgba(26,122,110,0.2); color: var(--teal); }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--ink); color: white; }
+  #experience h2.sec-title { color: white; }
+  #experience .sec-label { color: var(--teal-light); }
+  #experience .sec-label::after { background: var(--teal-light); }
+
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 0 3rem; padding: 3rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  .exp-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .exp-dates { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--teal-light); text-transform: uppercase; margin-bottom: 0.4rem; }
+  .exp-company { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 0.2rem; }
+  .exp-location { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.4; }
+  .exp-role { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.3rem; line-height: 1.2; }
+  .exp-contract-badge { display: inline-block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; background: rgba(26,122,110,0.2); color: var(--teal-light); border: 1px solid rgba(26,122,110,0.3); padding: 0.15rem 0.6rem; margin-bottom: 1rem; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.65; padding-left: 1.2rem; margin-bottom: 0.5rem; position: relative; }
+  .exp-bullets li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 5px; height: 1px; background: var(--teal-light); }
+  .exp-bullets li strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+  .taiyo-sub { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-bottom: 0.75rem; font-style: italic; line-height: 1.5; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card { background: var(--white); border: 1px solid var(--rule); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(20,20,20,0.08); }
+  .project-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .project-accent { background: var(--teal); padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: flex-end; }
+  .project-accent-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+  .project-accent-num { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 700; color: rgba(255,255,255,0.18); line-height: 1; }
+  .project-accent-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; }
+  .project-body { padding: 2.5rem; }
+  .project-tag { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.6rem; }
+  .project-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 0.75rem; line-height: 1.25; }
+  .project-body p { font-size: 0.9rem; color: var(--mid); line-height: 1.7; font-weight: 300; margin-bottom: 1.25rem; }
+  .project-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .project-card:not(.featured) .project-body { padding: 2rem; }
+  .project-card:not(.featured) .project-body h3 { font-size: 1.2rem; }
+
+  /* Case Studies CTA banner */
+  .case-studies-cta {
+    margin-top: 3rem;
+    border: 1px solid rgba(26,122,110,0.25);
+    background: var(--teal-faint);
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  }
+  .case-studies-cta-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+  .case-studies-cta-text p { font-size: 0.88rem; color: var(--mid); font-weight: 300; }
+
+  /* ── CERTIFICATIONS & EDUCATION ── */
+  #certifications { background: var(--white); }
+  .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+  .cert-card { border: 1px solid var(--rule); padding: 2rem 1.5rem; transition: border-color 0.2s; }
+  .cert-card:hover { border-color: var(--teal); }
+  .cert-card.highlight { border-color: var(--teal); background: var(--teal-faint); }
+  .cert-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+  .cert-icon { font-size: 1.5rem; }
+  .cert-status { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 100px; }
+  .cert-status.active { background: rgba(26,122,110,0.1); color: var(--teal); border: 1px solid rgba(26,122,110,0.25); }
+  .cert-status.complete { background: rgba(20,20,20,0.05); color: var(--mid); border: 1px solid var(--rule); }
+  .cert-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; line-height: 1.2; }
+  .cert-issuer { font-size: 0.78rem; color: var(--mid); }
+
+  /* Education cards */
+  .edu-section-label {
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--teal); font-weight: 600; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .edu-section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--teal); }
+  .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .edu-card { border: 1px solid var(--rule); padding: 2rem; position: relative; overflow: hidden; }
+  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--teal); }
+  .edu-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.35rem; }
+  .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 0.2rem; line-height: 1.25; }
+  .edu-school { font-size: 0.9rem; color: var(--charcoal); font-weight: 500; margin-bottom: 0.1rem; }
+  .edu-dates { font-size: 0.75rem; color: var(--mid); letter-spacing: 0.06em; margin-bottom: 1rem; }
+  .edu-details { margin-top: 0.75rem; }
+  .edu-detail-row { font-size: 0.82rem; color: var(--mid); line-height: 1.55; margin-bottom: 0.4rem; font-weight: 300; }
+  .edu-detail-row strong { color: var(--charcoal); font-weight: 500; }
+  .edu-exchange { margin-top: 0.75rem; padding: 0.75rem 1rem; background: var(--teal-faint); border: 1px solid rgba(26,122,110,0.15); }
+  .edu-exchange-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.3rem; }
+  .edu-exchange-val { font-size: 0.8rem; color: var(--charcoal); line-height: 1.5; }
+
+  /* ── LANGUAGES & GLOBAL ── */
+  #global { background: var(--bg); }
+  .global-layout { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+  .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 2rem; }
+  .lang-cell { background: var(--bg); padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .lang-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+  .lang-level { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); padding: 0.15rem 0.5rem; border: 1px solid rgba(26,122,110,0.25); }
+  .global-facts { display: flex; flex-direction: column; gap: 1rem; }
+  .global-fact { border: 1px solid var(--rule); padding: 1.25rem 1.5rem; }
+  .global-fact-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--teal); line-height: 1; margin-bottom: 0.2rem; }
+  .global-fact-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+
+  /* ── RESUME CTA ── */
+  #resume { background: var(--teal); padding: 6rem 6%; display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap; }
+  .resume-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: white; margin-bottom: 0.6rem; line-height: 1.15; }
+  .resume-text p { font-size: 1rem; color: rgba(255,255,255,0.7); font-weight: 300; max-width: 480px; line-height: 1.7; }
+  .resume-actions { display: flex; gap: 1rem; flex-wrap: wrap; flex-shrink: 0; }
+  .btn-white { background: white; color: var(--teal); }
+  .btn-white:hover { background: var(--bg); }
+  .btn-outline-white { border: 1px solid rgba(255,255,255,0.4); color: white; background: transparent; }
+  .btn-outline-white:hover { border-color: white; }
+
+  footer { background: var(--ink); padding: 1.75rem 6%; display: flex; align-items: center; justify-content: space-between; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 1.75rem; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal-light); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 960px) {
+    .about-layout, .global-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+    .skills-layout { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; display: block; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .edu-cards { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .nav-links { display: none; }
+    #resume { flex-direction: column; }
+  }
+  @media (max-width: 600px) {
+    .skills-layout, .certs-grid, .lang-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-brand">Ksenia <span>Habiger</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/ksenia-habiger/" target="_blank" rel="noopener" class="nav-linkedin">↗ LinkedIn</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Ksenia Habiger · Senior Financial Analyst · FP&amp;A · CFA Level III Candidate</span>
+    </div>
+    <h1 class="hero-name">Forecasting.<br>Performance.<br><em>Clarity.</em></h1>
+    <p class="hero-summary">
+      8+ years building <strong>scalable financial processes</strong> across energy, utilities, and asset management. Specializing in <strong>driver-based forecasting, margin analysis</strong>, and automating the reporting workflows that give finance teams — and executives — real visibility into what's driving performance.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn btn-filled">View Experience ↓</a>
+      <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Resume</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">8+</div>
+      <div class="hero-stat-label">Years in Finance</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">75%</div>
+      <div class="hero-stat-label">Forecast Cycle Reduction at NW Natural</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">~80%</div>
+      <div class="hero-stat-label">Processing Time Cut via VBA</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">Languages Spoken</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section id="about">
+  <div class="sec-label">About Me</div>
+  <h2 class="sec-title">Analyst. Architect.<br>Business Partner.</h2>
+  <div class="about-layout">
+    <div class="about-body">
+      <p>I'm a Senior Financial Analyst with 8+ years of experience building <strong>driver-based forecasting models, performance reporting frameworks, and scalable financial process infrastructure</strong> across regulated utilities, residential solar, and investment management.</p>
+      <p>My work sits at the intersection of finance and operations. I'm most effective when there's a gap between what the business knows and what leadership needs to see — whether that means <strong>redesigning a broken forecast tool, automating a manual reporting cycle, or building KPI dashboards</strong> that turn cost and operational data into executive-ready insights.</p>
+      <p>I'm a <strong>CFA Level III candidate</strong> with a Master's in International Business from Tübingen, including MBA exchanges in Japan and South Korea. I bring a genuinely global perspective — having lived across Europe, Asia, and North America — and thrive in environments that reward rigorous thinking, continuous improvement, and finance that actually drives decisions.</p>
+    </div>
+    <div class="about-aside">
+      <!-- Photo placeholder — replace img tag src with your photo file when ready -->
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">🖼</div>
+        <div class="photo-placeholder-txt">Add your photo here<br>(upload to GitHub repo)</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-block-label">Location</div>
+        <div class="aside-block-val">Portland, OR · Open to Remote</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-block-label">Targeting</div>
+        <div class="aside-block-val">FP&amp;A Manager · Senior FP&amp;A Analyst<br>Finance Business Partner</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-block-label">Industry Focus</div>
+        <div class="aside-block-val">Energy · Utilities · Infrastructure<br>Asset Management · Tech</div>
+      </div>
+      <div class="aside-block">
+        <div class="aside-block-label">Status</div>
+        <div class="aside-block-val">EU Citizen (Germany) · US Green Card<br>No sponsorship required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SKILLS ═══════════════════ -->
+<section id="skills">
+  <div class="sec-label">Skills</div>
+  <h2 class="sec-title">Core FP&amp;A Competencies</h2>
+  <div class="skills-layout">
+    <div class="skill-cell">
+      <div class="skill-cell-icon">📐</div>
+      <h3>Financial Modeling</h3>
+      <div class="skill-pills">
+        <span class="pill teal">Driver-Based Forecasting</span>
+        <span class="pill">DCF Models</span>
+        <span class="pill">Three-Statement Models</span>
+        <span class="pill">Unit Economics</span>
+        <span class="pill">Job-Level Profitability</span>
+        <span class="pill">Cash Flow Forecasting</span>
+        <span class="pill">Scenario &amp; Sensitivity Analysis</span>
+        <span class="pill">M&amp;A Modeling</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">📊</div>
+      <h3>Reporting &amp; Analytics</h3>
+      <div class="skill-pills">
+        <span class="pill teal">KPI Dashboard Design</span>
+        <span class="pill">Executive Reporting</span>
+        <span class="pill">Variance Analysis</span>
+        <span class="pill">Margin Analysis</span>
+        <span class="pill">Performance Attribution</span>
+        <span class="pill">SOX Compliance</span>
+        <span class="pill">Investor Reporting</span>
+        <span class="pill">Budgeting &amp; Forecasting</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">⚙️</div>
+      <h3>Process Automation</h3>
+      <div class="skill-pills">
+        <span class="pill teal">Advanced Excel / VBA</span>
+        <span class="pill">Power Query</span>
+        <span class="pill">Macros &amp; Data Tables</span>
+        <span class="pill">Workflow Redesign</span>
+        <span class="pill">Reporting Infrastructure</span>
+        <span class="pill">Database Centralization</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">🛠️</div>
+      <h3>Tools &amp; Systems</h3>
+      <div class="skill-pills">
+        <span class="pill teal">Power BI</span>
+        <span class="pill">Tableau</span>
+        <span class="pill">Python</span>
+        <span class="pill">SQL</span>
+        <span class="pill">Bloomberg</span>
+        <span class="pill">FactSet</span>
+        <span class="pill">SAP</span>
+        <span class="pill">Salesforce</span>
+        <span class="pill">QuickBooks</span>
+        <span class="pill">Advent Portfolio Exchange</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">🤝</div>
+      <h3>Business Partnering</h3>
+      <div class="skill-pills">
+        <span class="pill teal">Cross-Functional Collaboration</span>
+        <span class="pill">PMO Support</span>
+        <span class="pill">Sales Compensation Design</span>
+        <span class="pill">Ops-to-Finance Translation</span>
+        <span class="pill">Executive Presentations</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">📋</div>
+      <h3>Standards &amp; Compliance</h3>
+      <div class="skill-pills">
+        <span class="pill teal">US GAAP</span>
+        <span class="pill">IFRS</span>
+        <span class="pill">GIPS</span>
+        <span class="pill">SOX Controls</span>
+        <span class="pill">ESG Reporting</span>
+        <span class="pill">Audit Readiness</span>
+        <span class="pill">Financial Reporting</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">🏗️</div>
+      <h3>FP&amp;A Operations</h3>
+      <div class="skill-pills">
+        <span class="pill teal">Budget &amp; Reforecast Cycles</span>
+        <span class="pill">Cost Estimation</span>
+        <span class="pill">Capital Project Tracking</span>
+        <span class="pill">Monthly Close Support</span>
+        <span class="pill">Project Finance</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">🌱</div>
+      <h3>Sustainable Finance</h3>
+      <div class="skill-pills">
+        <span class="pill teal">ESG Integration</span>
+        <span class="pill">Socially Responsible Investing</span>
+        <span class="pill">Climate-Focused Finance</span>
+        <span class="pill">Impact Investing</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-icon">🌐</div>
+      <h3>Global &amp; Cultural Fluency</h3>
+      <div class="skill-pills">
+        <span class="pill teal">6 Languages</span>
+        <span class="pill">7 Countries Lived In</span>
+        <span class="pill">Cross-Border Finance</span>
+        <span class="pill">APAC Market Exposure</span>
+        <span class="pill">Intercultural Leadership</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ EXPERIENCE ═══════════════════ -->
+<section id="experience">
+  <div class="sec-label">Experience</div>
+  <h2 class="sec-title">Career History</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-dates">Nov 2025 – Present</div>
+        <div class="exp-company">Pinnacle Solar NW</div>
+        <div class="exp-location">Portland, OR (Remote)</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Finance Consultant, FP&amp;A &amp; Business Strategy</div>
+        <ul class="exp-bullets">
+          <li>Built <strong>job-level profitability and unit economics models</strong> to evaluate project margins, labor efficiency, and cost drivers in residential solar operations</li>
+          <li>Developed a <strong>cash flow forecasting model</strong> to improve liquidity planning in a project-based revenue environment</li>
+          <li>Designed <strong>sales compensation analytics</strong> to align incentives with margin and long-term customer value</li>
+          <li>Partnered with leadership to translate <strong>operational metrics into financial KPIs</strong> supporting scalable growth</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-dates">Dec 2023 – Jun 2025</div>
+        <div class="exp-company">NW Natural</div>
+        <div class="exp-location">Portland, OR (Remote)<br>via Strategic Business Solutions</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Senior Financial Analyst</div>
+        <div class="exp-contract-badge">Contract · Regulated Utility · SOX Environment</div>
+        <ul class="exp-bullets">
+          <li>Supported <strong>FP&amp;A and SOX financial reporting</strong> for 15+ infrastructure and capital projects within a regulated utility environment</li>
+          <li><strong>Automated forecasting tool</strong>, reducing process time by 75% and increasing forecast accuracy across the capital project portfolio</li>
+          <li>Developed <strong>KPI dashboards for PMO leadership</strong>, enabling executive visibility into capital deployment and cost performance</li>
+          <li>Led project cost estimation and purchase order oversight to manage budget adherence across multiple concurrent initiatives</li>
+          <li>Automated recurring reporting processes, reducing manual errors and improving financial transparency</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-dates">Dec 2018 – Jul 2023</div>
+        <div class="exp-company">Taiyo Pacific Partners</div>
+        <div class="exp-location">Kirkland, WA<br>Japan &amp; India Equities</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Sr. Financial Analyst → Investment Accountant</div>
+        <p class="taiyo-sub">Progression: Sr. Financial Analyst (Jun–Jul 2023) · Financial Analyst / Sr. Investment Accountant (Jan 2022–Jun 2023) · Investment Accountant (May 2019–Dec 2021) · Contract (Dec 2018–Apr 2019)</p>
+        <ul class="exp-bullets">
+          <li>Led <strong>firm-wide quarterly performance reporting</strong> to external investors, coordinating with 20+ cross-functional stakeholders to deliver consolidated KPIs, portfolio analytics, and executive-ready insights</li>
+          <li>Streamlined <strong>budgeting and expense forecasting processes</strong>, improving transparency into cost drivers and strengthening variance analysis across funds and departments</li>
+          <li>Automated <strong>daily pricing and reporting workflows via VBA</strong>, reducing processing time by ~80% and minimizing operational risk</li>
+          <li>Built a <strong>centralized reporting database</strong> that eliminated three redundant manual processes and improved data consistency across Finance and Research</li>
+          <li>Partnered with Portfolio Management on <strong>performance attribution and risk concentration analysis</strong>, supporting investment decision-making</li>
+          <li>Led <strong>system onboarding and reporting infrastructure improvements</strong> during organizational transitions, enhancing scalability and process reliability</li>
+          <li>Supported external audits and SOX-equivalent compliance reporting, reinforcing financial integrity and governance standards</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<section id="projects">
+  <div class="sec-label">Projects &amp; Case Studies</div>
+  <h2 class="sec-title">Selected Work</h2>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="project-accent">
+        <div class="project-accent-label">Impact</div>
+        <div class="project-accent-num">75%</div>
+        <div class="project-accent-sub">Reduction in forecasting cycle time</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tag">Automation · FP&amp;A · Regulated Utility</div>
+        <h3>Capital Project Forecasting Tool — NW Natural</h3>
+        <p>Redesigned an end-to-end forecasting tool for a portfolio of 15+ regulated infrastructure projects. Automated data ingestion, variance flagging, and report generation — cutting the monthly forecast cycle from days to hours while improving accuracy and auditability within a SOX-compliant environment.</p>
+        <div class="project-pills">
+          <span class="pill teal">Excel / VBA</span>
+          <span class="pill">Power Query</span>
+          <span class="pill">SOX Controls</span>
+          <span class="pill">Capital Projects</span>
+          <span class="pill">PMO Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-tag">Unit Economics · Solar Operations</div>
+        <h3>Job-Level Profitability Model</h3>
+        <p>Built a ground-up profitability framework for Pinnacle Solar NW enabling margin visibility at the individual job level. Incorporated labor efficiency, material costs, and revenue recognition to support pricing decisions and project portfolio prioritization.</p>
+        <div class="project-pills">
+          <span class="pill teal">Unit Economics</span>
+          <span class="pill">Margin Analysis</span>
+          <span class="pill">Cash Flow Forecasting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-tag">Automation · Investment Management</div>
+        <h3>Centralized Reporting Database — Taiyo Pacific</h3>
+        <p>Consolidated three redundant manual reporting processes into a single automated infrastructure. Reduced ~80% of daily processing time via VBA workflows and improved data integrity across Finance and Research — supporting quarterly investor reporting for 20+ stakeholders.</p>
+        <div class="project-pills">
+          <span class="pill teal">VBA Automation</span>
+          <span class="pill">Data Architecture</span>
+          <span class="pill">Investor Reporting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Case Studies CTA -->
+  <div class="case-studies-cta">
+    <div class="case-studies-cta-text">
+      <h3>Interactive Case Studies &amp; Financial Models</h3>
+      <p>Explore Excel-based models, KPI dashboards, and analytical frameworks — including DCF models, dynamic forecasts, scenario analyses, and more.</p>
+    </div>
+    <a href="case-studies.html" class="btn btn-filled">View Case Studies ↗</a>
+  </div>
+</section>
+
+<!-- ═══════════════════ CERTIFICATIONS & EDUCATION ═══════════════════ -->
+<section id="certifications">
+  <div class="sec-label">Credentials</div>
+  <h2 class="sec-title">Certifications &amp; Education</h2>
+
+  <!-- Certifications -->
+  <div class="certs-grid">
+    <div class="cert-card highlight">
+      <div class="cert-top">
+        <div class="cert-icon">📜</div>
+        <span class="cert-status active">In Progress</span>
+      </div>
+      <div class="cert-title">CFA Level III Candidate</div>
+      <div class="cert-issuer">CFA Institute · Passed Level II (2026)</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-top">
+        <div class="cert-icon">🏅</div>
+        <span class="cert-status complete">Certified</span>
+      </div>
+      <div class="cert-title">Financial Modeling &amp; Valuation Analyst (FMVA)</div>
+      <div class="cert-issuer">Corporate Finance Institute</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-top">
+        <div class="cert-icon">🏗️</div>
+        <span class="cert-status complete">Certified</span>
+      </div>
+      <div class="cert-title">Project Finance Modeling</div>
+      <div class="cert-issuer">Pivotal 180</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-top">
+        <div class="cert-icon">📊</div>
+        <span class="cert-status complete">Certified</span>
+      </div>
+      <div class="cert-title">M&amp;A Modeling · Budgeting &amp; Forecasting · Scenario Analysis</div>
+      <div class="cert-issuer">Corporate Finance Institute</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-top">
+        <div class="cert-icon">🌿</div>
+        <span class="cert-status complete">Certified</span>
+      </div>
+      <div class="cert-title">Bloomberg ESG Certificate</div>
+      <div class="cert-issuer">Bloomberg · Environmental, Social &amp; Governance</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-top">
+        <div class="cert-icon">📈</div>
+        <span class="cert-status complete">Certified</span>
+      </div>
+      <div class="cert-title">Bloomberg Market Concepts (BMC)</div>
+      <div class="cert-issuer">Bloomberg</div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="edu-section-label">Academic Background</div>
+  <div class="edu-cards">
+
+    <div class="edu-card">
+      <div class="edu-tag">Graduate Degree</div>
+      <div class="edu-degree">Master of Science in International Business &amp; East Asian Studies</div>
+      <div class="edu-school">Eberhard Karls Universität Tübingen, Germany</div>
+      <div class="edu-dates">Oct 2015 – Oct 2017</div>
+      <div class="edu-details">
+        <div class="edu-detail-row"><strong>Major:</strong> Finance</div>
+        <div class="edu-detail-row"><strong>Thesis:</strong> The Impact of Culture on the Innovation Process: An Analysis of Cultural Dimensions</div>
+        <div class="edu-detail-row"><strong>Coursework:</strong> Advanced Corporate Finance, Managerial Accounting &amp; Cost Analysis, Knowledge &amp; Innovation Management, Operations Management, Options &amp; Futures, Sustainable Management, Responsible Leadership, Socially Responsible Investing</div>
+        <div class="edu-exchange">
+          <div class="edu-exchange-label">International MBA Exchange Semesters</div>
+          <div class="edu-exchange-val">Doshisha Business School — Kyoto, Japan<br>Ewha School of Business — Seoul, South Korea</div>
+        </div>
+        <div class="edu-detail-row" style="margin-top:0.5rem"><strong>Activities:</strong> Student Council President · Language Center Ambassador for Business Studies</div>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-tag">Undergraduate Degree</div>
+      <div class="edu-degree">Bachelor of Science in International Business Administration</div>
+      <div class="edu-school">Eberhard Karls Universität Tübingen, Germany</div>
+      <div class="edu-dates">Oct 2011 – Feb 2015</div>
+      <div class="edu-details">
+        <div class="edu-detail-row"><strong>Major:</strong> Accounting &amp; Finance</div>
+        <div class="edu-detail-row"><strong>Thesis:</strong> Distance Measures in International Business Studies</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ LANGUAGES & GLOBAL ═══════════════════ -->
+<section id="global">
+  <div class="sec-label">Global Profile</div>
+  <h2 class="sec-title">Languages &amp; International Reach</h2>
+  <div class="global-layout">
+    <div>
+      <div class="lang-grid">
+        <div class="lang-cell">
+          <span class="lang-name">German</span>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-cell">
+          <span class="lang-name">Russian</span>
+          <span class="lang-level">Native</span>
+        </div>
+        <div class="lang-cell">
+          <span class="lang-name">English</span>
+          <span class="lang-level">Fluent</span>
+        </div>
+        <div class="lang-cell">
+          <span class="lang-name">Spanish</span>
+          <span class="lang-level">Fluent</span>
+        </div>
+        <div class="lang-cell">
+          <span class="lang-name">Japanese</span>
+          <span class="lang-level">Elementary</span>
+        </div>
+        <div class="lang-cell">
+          <span class="lang-name">French</span>
+          <span class="lang-level">Elementary</span>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem; padding: 1.5rem; border: 1px solid var(--rule); background: var(--white);">
+        <div class="edu-tag" style="margin-bottom:0.75rem">Community &amp; Associations</div>
+        <div class="edu-detail-row">CFA Society Seattle — book club, study group &amp; mentorship program</div>
+        <div class="edu-detail-row">9zero Seattle — Climate coworking space member</div>
+        <div class="edu-detail-row">Time for the Planet — Impact Investor</div>
+        <div class="edu-detail-row">Lean In Seattle Chapter</div>
+        <div class="edu-detail-row">Sierra Club</div>
+        <div class="edu-detail-row">Green Lake Crew — Masters rowing team</div>
+      </div>
+    </div>
+    <div class="global-facts">
+      <div class="global-fact">
+        <div class="global-fact-num">32</div>
+        <div class="global-fact-label">Countries Visited</div>
+      </div>
+      <div class="global-fact">
+        <div class="global-fact-num">7</div>
+        <div class="global-fact-label">Countries Lived In</div>
+      </div>
+      <div class="global-fact">
+        <div class="global-fact-num">6</div>
+        <div class="global-fact-label">Languages Spoken</div>
+      </div>
+      <div class="global-fact" style="border-color: rgba(26,122,110,0.3); background: var(--teal-faint);">
+        <div class="global-fact-num" style="font-size:1rem; font-family:'Outfit',sans-serif; font-weight:500; color:var(--teal);">EU Citizen (Germany)<br>US Green Card Holder</div>
+        <div class="global-fact-label" style="margin-top:0.3rem">No sponsorship required</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ RESUME CTA ═══════════════════ -->
+<section id="resume">
+  <div class="resume-text">
+    <h2>Ready to bring FP&amp;A<br>clarity to your team.</h2>
+    <p>Open to Senior FP&amp;A Analyst, FP&amp;A Manager, and Finance Business Partner roles — remote or Portland-based. Let's talk about how I can help your team forecast better, report faster, and make more confident decisions.</p>
+  </div>
+  <div class="resume-actions">
+    <!-- Update href to "resume.pdf" once uploaded to your GitHub repo -->
+    <a href="resume.pdf" class="btn btn-white" target="_blank">⬇ Download Resume</a>
+    <a href="https://www.linkedin.com/in/ksenia-habiger/" target="_blank" rel="noopener" class="btn btn-outline-white">↗ LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 · Ksenia Habiger · FP&amp;A Portfolio</p>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/ksenia-habiger/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="case-studies.html">Case Studies</a>
+  </div>
+</footer>
+
+</body>
+</html>
