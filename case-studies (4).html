@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies — Ksenia Habiger</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141414;
+    --charcoal: #2A2A2A;
+    --mid: #5A5A5A;
+    --teal: #1A7A6E;
+    --teal-light: #22A094;
+    --teal-faint: rgba(26,122,110,0.07);
+    --bg: #F8F6F2;
+    --white: #FFFFFF;
+    --rule: rgba(20,20,20,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); }
+
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 200;
+    background: rgba(248,246,242,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 6%; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .nav-brand span { color: var(--teal); }
+  .nav-back { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+  .nav-back:hover { color: var(--teal); }
+
+  .page-header {
+    padding: 9rem 6% 4rem;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+  }
+  .page-header::before {
+    content: 'MODELS';
+    position: absolute; right: -1%; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(8rem, 16vw, 16rem); font-weight: 700;
+    color: rgba(255,255,255,0.03); line-height: 1;
+    pointer-events: none; user-select: none;
+  }
+  .page-eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal-light); font-weight: 500; margin-bottom: 1rem; }
+  .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; color: white; line-height: 1.05; margin-bottom: 1rem; }
+  .page-header p { font-size: 1rem; color: rgba(255,255,255,0.55); font-weight: 300; max-width: 560px; line-height: 1.7; }
+
+  .embed-note {
+    margin: 2rem 6% 0;
+    padding: 1rem 1.5rem;
+    background: rgba(26,122,110,0.12);
+    border: 1px solid rgba(26,122,110,0.25);
+    border-radius: 2px;
+    font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6;
+  }
+  .embed-note strong { color: var(--teal-light); }
+
+  main { padding: 5rem 6% 6rem; }
+
+  .case-study {
+    margin-bottom: 5rem;
+    animation: fadeUp 0.7s both;
+  }
+  .case-study:nth-child(2) { animation-delay: 0.1s; }
+  .case-study:nth-child(3) { animation-delay: 0.2s; }
+  .case-study:nth-child(4) { animation-delay: 0.3s; }
+
+  .cs-header { margin-bottom: 1.5rem; }
+  .cs-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.4rem; }
+  .cs-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.15; }
+  .cs-header p { font-size: 0.92rem; color: var(--mid); font-weight: 300; line-height: 1.65; max-width: 680px; }
+
+  .cs-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cs-meta-item { font-size: 0.75rem; letter-spacing: 0.06em; color: var(--mid); display: flex; align-items: center; gap: 0.4rem; }
+  .cs-meta-item strong { color: var(--charcoal); font-weight: 500; }
+
+  /* The Google Sheets embed container */
+  .sheet-embed-wrapper {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .sheet-embed-wrapper iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    display: block;
+  }
+  /* Placeholder shown until a real Google Sheets URL is added */
+  .sheet-placeholder {
+    width: 100%; height: 400px;
+    background: var(--white);
+    border: 1px dashed rgba(26,122,110,0.3);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.75rem; text-align: center; padding: 2rem;
+  }
+  .sheet-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+  .sheet-placeholder-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+  .sheet-placeholder-steps { font-size: 0.82rem; color: var(--mid); line-height: 1.7; max-width: 480px; }
+  .sheet-placeholder-steps code { font-family: monospace; font-size: 0.78rem; background: var(--bg); padding: 0.1rem 0.4rem; border: 1px solid var(--rule); }
+
+  .cs-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+  .pill { font-size: 0.72rem; padding: 0.2rem 0.65rem; background: var(--white); border: 1px solid var(--rule); color: var(--charcoal); border-radius: 100px; }
+  .pill.teal { background: var(--teal-faint); border-color: rgba(26,122,110,0.2); color: var(--teal); }
+
+  .divider { height: 1px; background: var(--rule); margin-bottom: 5rem; }
+
+  .back-cta { text-align: center; padding: 3rem 0 0; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-decoration: none; transition: all 0.2s; font-family: 'Outfit', sans-serif; }
+  .btn-outline { border: 1px solid rgba(20,20,20,0.2); color: var(--charcoal); background: transparent; }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+  .btn-filled { background: var(--teal); color: white; }
+  .btn-filled:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+  footer { background: var(--ink); padding: 1.75rem 6%; display: flex; align-items: center; justify-content: space-between; }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 1.75rem; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal-light); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    .sheet-embed-wrapper iframe { height: 360px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">Ksenia <span>Habiger</span></a>
+  <a href="index.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<header class="page-header">
+  <div class="page-eyebrow">Ksenia Habiger · Case Studies</div>
+  <h1>Financial Models<br>&amp; KPI Dashboards</h1>
+  <p>Live interactive views of Excel-based models, analytical frameworks, and dashboards. Each model is embedded via Google Sheets for in-browser exploration — no download required.</p>
+</header>
+
+<main>
+
+  <!-- ── CASE STUDY 1: POWER BI DASHBOARD ── -->
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-tag">KPI Dashboard · Solar Operations · Power BI</div>
+      <h2>Operations KPI Dashboard — Solar and Battery Installation Co</h2>
+      <p>An end-to-end Power BI dashboard built on a multi-table dataset spanning 300 projects, 250 sales leads, and a detailed cost breakdown across equipment, labor, and permits. The dashboard surfaces key operational metrics — revenue by state, gross margin, win rate by sales rep, battery attach rate, and cost composition — with interactive slicers enabling dynamic filtering by state, battery type, date range, and sales rep.</p>
+    </div>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><strong>Tools:</strong> Power BI · DAX · Power Query</div>
+      <div class="cs-meta-item"><strong>Focus:</strong> KPI Reporting · Sales Analytics · Cost Analysis</div>
+      <div class="cs-meta-item"><strong>Context:</strong> Residential Solar · Operations</div>
+    </div>
+
+    <div class="sheet-embed-wrapper">
+      <iframe src="Solar_Dashboard_PDF.pdf" style="height:600px;" allowfullscreen></iframe>
+    </div>
+
+    <div class="cs-pills">
+      <span class="pill teal">Power BI</span>
+      <span class="pill teal">DAX Measures</span>
+      <span class="pill">KPI Dashboard</span>
+      <span class="pill">Sales Analytics</span>
+      <span class="pill">Cost Breakdown</span>
+      <span class="pill">Interactive Slicers</span>
+      <span class="pill">Win Rate Analysis</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── CASE STUDY 2: SOLAR PROFITABILITY MODEL ── -->
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-tag">Unit Economics · Solar Operations</div>
+      <h2>Job-Level Profitability Model — Solar and Battery Installation Co</h2>
+      <p>Built from the ground up to give Solar and Battery Installation Co margin visibility at the individual job level — something that didn't exist before. The model integrates labor hours, material costs, and revenue recognition to surface true job-level profitability, enabling data-driven pricing decisions and clearer prioritization across the project portfolio. Also includes a cash flow forecasting layer to support liquidity planning in a project-based revenue environment.</p>
+    </div>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><strong>Tools:</strong> Excel · Dynamic Forecasting</div>
+      <div class="cs-meta-item"><strong>Focus:</strong> Unit Economics · Cash Flow</div>
+      <div class="cs-meta-item"><strong>Context:</strong> Residential Solar · Operations</div>
+    </div>
+
+    <div class="sheet-embed-wrapper">
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTOqBPPZ7-tMiUqXpEJbn0yuR32SA739CBj1WCyVjjS5QKaU8y_fOZ1t4QXdYDx_atTZVsnE7Wxmlv-/pubhtml?widget=true&headers=false" allowfullscreen></iframe>
+    </div>
+
+    <div class="cs-pills">
+      <span class="pill teal">Unit Economics</span>
+      <span class="pill">Margin Analysis</span>
+      <span class="pill">Cash Flow Forecasting</span>
+      <span class="pill">Labor Efficiency</span>
+      <span class="pill">Pricing Strategy</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── CASE STUDY 3: CROPS ── -->
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-tag">Financial Modeling · Agriculture · Portfolio Case Study</div>
+      <h2>Crop Nursery Financial Model</h2>
+      <p>A four-year integrated financial model for a specialty crop nursery, built on an accrual basis with FIFO inventory accounting across three distinct crop lines. The model tracks revenue, cost of goods sold, and gross profit at both the product and consolidated level — designed to support production planning and investment decisions for early-stage agricultural operations.</p>
+    </div>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><strong>Tools:</strong> Excel</div>
+      <div class="cs-meta-item"><strong>Horizon:</strong> 4-Year Model</div>
+      <div class="cs-meta-item"><strong>Accounting:</strong> Accrual · FIFO Inventory</div>
+    </div>
+
+    <div class="sheet-embed-wrapper">
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqarhv4JqwJsJl9ZZRMVYJbpY_djfAql32SZG1xbpg8MXPi-P6Opye_H85yaIQiZqylEqzY9CDWPGk/pubhtml?widget=true&headers=false" allowfullscreen></iframe>
+    </div>
+
+    <div class="cs-pills">
+      <span class="pill teal">Three-Statement Logic</span>
+      <span class="pill">FIFO Inventory</span>
+      <span class="pill">Accrual Accounting</span>
+      <span class="pill">Multi-Crop P&amp;L</span>
+      <span class="pill">Gross Profit Analysis</span>
+      <span class="pill">Production Planning</span>
+    </div>
+  </div>
+
+  <div class="back-cta">
+    <a href="index.html" class="btn btn-outline">← Back to Portfolio</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 · Ksenia Habiger · FP&amp;A Portfolio</p>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/ksenia-habiger/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="index.html">Portfolio</a>
+  </div>
+</footer>
+
+</body>
+</html>
